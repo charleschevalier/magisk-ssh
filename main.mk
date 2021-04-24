@@ -12,10 +12,10 @@ TRIPLET_ARCH?=aarch64
 ANDROID_MARCH?=armv8-a
 CFLAGS=-O3 -pipe -fomit-frame-pointer -fPIE
 LDFLAGS=-pie
-CC=$(CROSS)-gcc
-LD=$(CROSS)-ld
-AS=$(CROSS)-as
-AR=$(CROSS)-ar
+CC=$(ANDROID_ROOT)/custom-toolchains/$(ANDROID_ARCH)/bin/$(CROSS)-gcc
+LD=$(ANDROID_ROOT)/custom-toolchains/$(ANDROID_ARCH)/bin/$(CROSS)-ld
+AS=$(ANDROID_ROOT)/custom-toolchains/$(ANDROID_ARCH)/bin/$(CROSS)-as
+AR=$(ANDROID_ROOT)/custom-toolchains/$(ANDROID_ARCH)/bin/$(CROSS)-ar
 CROSS?=$(TRIPLET_ARCH)-linux-android
 OPENSSL_ARCH?=$(TRIPLET_ARCH)
 
@@ -24,8 +24,8 @@ ARCHIVE_DIR:=$(shell realpath $(ARCHIVE_DIR))
 SRC_DIR:=$(shell realpath $(SRC_DIR))
 
 #Logic starts here
-CFLAGS+=-I$(ANDROID_ROOT)/platforms/$(ANDROID_PLATFORM)/arch-$(ANDROID_ARCH)/usr/include/ --sysroot=$(ANDROID_ROOT)/platforms/$(ANDROID_PLATFORM)/arch-$(ANDROID_ARCH)/ -march=$(ANDROID_MARCH)
-LDFLAGS+=-L$(ANDROID_ROOT)/platforms/$(ANDROID_PLATFORM)/arch-$(ANDROID_ARCH)/usr/lib/ --sysroot=$(ANDROID_ROOT)/platforms/$(ANDROID_PLATFORM)/arch-$(ANDROID_ARCH)/
+CFLAGS+=-I$(ANDROID_ROOT)/custom-toolchains/$(ANDROID_ARCH)/sysroot/usr/include/ --sysroot=$(ANDROID_ROOT)/custom-toolchains/$(ANDROID_ARCH)/sysroot/ -march=$(ANDROID_MARCH)
+LDFLAGS+=-L$(ANDROID_ROOT)/custom-toolchains/$(ANDROID_ARCH)/sysroot/usr/lib/ --sysroot=$(ANDROID_ROOT)/custom-toolchains/$(ANDROID_ARCH)/sysroot/ -march=$(ANDROID_MARCH)
 $(eval $(call save_flags))
 
 define arch-targets
@@ -43,5 +43,6 @@ $(eval $(call submk,global_targets.mk))
 $(eval $(call submk,openssl.mk))
 $(eval $(call submk,openssh.mk))
 $(eval $(call submk,rsync.mk))
+$(eval $(call submk,autossh.mk))
 
 $(eval $(arch-targets))

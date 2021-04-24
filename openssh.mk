@@ -15,9 +15,12 @@ PACKAGE_INSTALLED_FILES:= $(BUILD_DIR)/usr/bin/ssh         \
                           $(BUILD_DIR)/usr/bin/sftp        \
                           $(BUILD_DIR)/usr/bin/scp         \
                           $(BUILD_DIR)/usr/bin/sftp-server \
-                          $(BUILD_DIR)/usr/bin/ssh-keygen
+                          $(BUILD_DIR)/usr/bin/ssh-keygen \
+                          $(BUILD_DIR)/usr/bin/autossh
 
 PACKAGE_WANT_PREPARE=true
+
+export PATH := $(ANDROID_ROOT)/custom-toolchains/$(ANDROID_ARCH)/bin:$(PATH)
 
 define pkg-targets
 $(BUILD_DIR)/$(PACKAGE)/stamp.configured: $(SRC_DIR)/$(PACKAGE)/stamp.prepared $(call depend-built,openssl)
