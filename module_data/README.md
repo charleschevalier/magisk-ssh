@@ -47,6 +47,11 @@ Feel free to create a Merge Request against the [source repository](https://gitl
 
 ## Changelog
 
+###### 2021-04-25, v0.20
+
+- Version bump.
+- Autossh 1.4g
+
 ###### 2020-07-18, v0.11
 
 - Version bump.
