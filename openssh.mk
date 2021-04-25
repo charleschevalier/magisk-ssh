@@ -15,8 +15,7 @@ PACKAGE_INSTALLED_FILES:= $(BUILD_DIR)/usr/bin/ssh         \
                           $(BUILD_DIR)/usr/bin/sftp        \
                           $(BUILD_DIR)/usr/bin/scp         \
                           $(BUILD_DIR)/usr/bin/sftp-server \
-                          $(BUILD_DIR)/usr/bin/ssh-keygen \
-                          $(BUILD_DIR)/usr/bin/autossh
+                          $(BUILD_DIR)/usr/bin/ssh-keygen
 
 PACKAGE_WANT_PREPARE=true
 
