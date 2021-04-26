@@ -47,6 +47,11 @@ Feel free to create a Merge Request against the [source repository](https://gitl
 
 ## Changelog
 
+###### 2021-04-25, v0.21
+
+- Version bump.
+- Changed install path to /system/bin instead of /usr/bin
+
 ###### 2021-04-25, v0.20
 
 - Version bump.

@@ -5,7 +5,7 @@ PACKAGE:=rsync
 
 ARCHIVE_NAME:=$(RSYNC).tar.gz
 DOWNLOAD_URL:=https://download.samba.org/pub/rsync/src/$(ARCHIVE_NAME)
-PACKAGE_INSTALLED_FILES:=$(BUILD_DIR)/usr/bin/rsync
+PACKAGE_INSTALLED_FILES:=$(BUILD_DIR)/system/bin/rsync
 
 CFLAGS+=-I$(BUILD_DIR)/openssl/include
 LDFLAGS+=-L$(BUILD_DIR)/openssl/
@@ -20,9 +20,9 @@ $(BUILD_DIR)/$(PACKAGE)/stamp.configured: $(SRC_DIR)/$(PACKAGE)/stamp.prepared $
 	  CFLAGS="$(CFLAGS)" CPPFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)"
 	$(make-configured-stamp)
 
-$(BUILD_DIR)/usr/bin/rsync: $(BUILD_DIR)/$(PACKAGE)/stamp.built
-	mkdir -p $(BUILD_DIR)/usr/bin/
-	cp -u "$(BUILD_DIR)/$(PACKAGE)/rsync" "$(BUILD_DIR)/usr/bin/"
+$(BUILD_DIR)/system/bin/rsync: $(BUILD_DIR)/$(PACKAGE)/stamp.built
+	mkdir -p $(BUILD_DIR)/system/bin/
+	cp -u "$(BUILD_DIR)/$(PACKAGE)/rsync" "$(BUILD_DIR)/system/bin/"
 endef
 
 $(eval $(package))

@@ -20,10 +20,10 @@ $(BUILD_DIR)/module/stamp.module-binaries: $(BUILD_DIR)/module/stamp.module-crea
                                            $(INSTALLED_FILES_arm64)                 \
                                            $(INSTALLED_FILES_x86)                   \
                                            $(INSTALLED_FILES_x86_64)                
-	cp -r $(BUILD_DIR)/arm/usr    $(BUILD_DIR)/module/magisk_ssh/arch/arm
-	cp -r $(BUILD_DIR)/arm64/usr  $(BUILD_DIR)/module/magisk_ssh/arch/arm64
-	cp -r $(BUILD_DIR)/x86/usr    $(BUILD_DIR)/module/magisk_ssh/arch/x86
-	cp -r $(BUILD_DIR)/x86_64/usr $(BUILD_DIR)/module/magisk_ssh/arch/x86_64
+	cp -r $(BUILD_DIR)/arm/system    $(BUILD_DIR)/module/magisk_ssh/arch/arm
+	cp -r $(BUILD_DIR)/arm64/system  $(BUILD_DIR)/module/magisk_ssh/arch/arm64
+	cp -r $(BUILD_DIR)/x86/system    $(BUILD_DIR)/module/magisk_ssh/arch/x86
+	cp -r $(BUILD_DIR)/x86_64/system $(BUILD_DIR)/module/magisk_ssh/arch/x86_64
 	touch $(BUILD_DIR)/module/stamp.module-binaries
 
 $(BUILD_DIR)/module/stamp.module-initscript: $(BUILD_DIR)/arm/openssh/stamp.built     \
@@ -32,7 +32,7 @@ $(BUILD_DIR)/module/stamp.module-initscript: $(BUILD_DIR)/arm/openssh/stamp.buil
 	    -e 's#=/bin#=/system/bin#'                 \
 	    -e 's#.*PidFile.*##'                       \
 	    -e 's#sbin#bin#'                           \
-	    -e 's#^prefix=.*#: $${MODDIR:="$$(realpath "$$(dirname "$$0")")"}\nexport MODDIR\nprefix=\"$$MODDIR/usr\"#' \
+	    -e 's#^prefix=.*#: $${MODDIR:="$$(realpath "$$(dirname "$$0")")"}\nexport MODDIR\nprefix=\"$$MODDIR/system\"#' \
 	    -e 's#@COMMENT_OUT_RSA1@.*##'              \
 	    $(BUILD_DIR)/arm/openssh/opensshd.init     \
 	    > $(BUILD_DIR)/module/magisk_ssh/common/opensshd.init
