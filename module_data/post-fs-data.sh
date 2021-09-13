@@ -8,22 +8,25 @@ else
   BIN_DIR="bin"
 fi
 
+if [ -d "/system/lib64" ]; then
+  LIB_DIR="lib64"
+else
+  LIB_DIR="lib"
+fi
+
 rm -rf "$MODPATH/system"
 mkdir -p "$MODPATH/system/$BIN_DIR"
+mkdir -p "$MODPATH/system/$LIB_DIR"
 
-for f in scp sftp sftp-server ssh ssh-keygen sshd; do
-  ln -s $MODPATH/bin/magisk_ssh_library_wrapper "$MODPATH/system/$BIN_DIR/$f"
-done
-for f in rsync autossh openssl; do
+for f in scp sftp sftp-server ssh ssh-keygen sshd rsync autossh openssl; do
   ln -s $MODPATH/bin/$f "$MODPATH/system/$BIN_DIR/$f"
 done
-ln -s $MODPATH/lib/libcrypto.so.1.1 "$MODPATH/lib/libcrypto.so"
+
+for f in libcrypto.so.1.1 libssl.so.1.1; do
+  ln -s $MODPATH/lib/$f "$MODPATH/system/$LIB_DIR/$f"
+done
 
 set_perm_recursive "$MODPATH/system/" 0 0 0755 0755
-
-# Update launcher
-/data/adb/magisk/busybox sed -i 's|bindir=|bindir='$MODPATH'/bin|g' $MODPATH/bin/magisk_ssh_library_wrapper
-/data/adb/magisk/busybox sed -i 's|libdir=|libdir='$MODPATH'/lib|g' $MODPATH/bin/magisk_ssh_library_wrapper
 
 # Update opensshd.init
 /data/adb/magisk/busybox sed -i 's|prefix="$MODDIR/system"|prefix="/system"|g' $MODPATH/opensshd.init

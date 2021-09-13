@@ -22,7 +22,6 @@ unzip -o "$ZIPFILE" 'common/service.sh' -d "$TMPDIR"
 unzip -o "$ZIPFILE" 'post-fs-data.sh' -d "$TMPDIR"
 mv "$TMPDIR/common/opensshd.init" "$MODPATH"
 mv "$TMPDIR/common/service.sh" "$MODPATH"
-mv "$TMPDIR/common/magisk_ssh_library_wrapper" "$MODPATH/bin"
 mv "$TMPDIR/post-fs-data.sh" "$MODPATH"
 
 ui_print "[2/6] Extracting libraries and binaries for $ARCH"
