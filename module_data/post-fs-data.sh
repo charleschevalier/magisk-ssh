@@ -14,7 +14,7 @@ mkdir -p "$MODPATH/system/$BIN_DIR"
 for f in scp sftp sftp-server ssh ssh-keygen sshd; do
   ln -s $MODPATH/bin/magisk_ssh_library_wrapper "$MODPATH/system/$BIN_DIR/$f"
 done
-for f in rsync autossh; do
+for f in rsync autossh openssl; do
   ln -s $MODPATH/bin/$f "$MODPATH/system/$BIN_DIR/$f"
 done
 ln -s $MODPATH/lib/libcrypto.so.1.1 "$MODPATH/lib/libcrypto.so"
